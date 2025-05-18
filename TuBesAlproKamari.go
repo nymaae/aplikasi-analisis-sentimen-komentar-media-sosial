@@ -225,7 +225,6 @@ func sortKomentarDesc() {
 	}
 }
 
-
 // Subprogram: Menampilkan Semua Komentar
 func tampilkanSemuaKomentar(){
 	var i int 
@@ -296,7 +295,6 @@ func hapusKomentar(){
 	}
 }
 
-
 // Subprogram: Mencari Komentar
 func cariKomentar(){
 	var keyword string
@@ -322,7 +320,7 @@ func cariKomentar(){
 	}
 }
 
-
+// Subprogram: Pencarian Komentar dengan Sequential Search
 func sequentialSearch(keyword string) {
 	var ditemukan bool = false
 	var i int
@@ -337,7 +335,7 @@ func sequentialSearch(keyword string) {
 	}
 }
 
-
+// Subprogram: Pencarian Komentar dengan Binary Search
 func binarySearch(keyword string) {
 	var low, high, mid int
 	sortKomentarAlphabet()
@@ -363,7 +361,6 @@ func binarySearch(keyword string) {
 	}
 }
 
-
 func sortKomentarAlphabet() {
 	var i, j int
 	for i = 0; i < jumlahKomentar-1; i++ {
@@ -374,7 +371,6 @@ func sortKomentarAlphabet() {
 		}
 	}
 }
-
 
 // Subprogram: Mengurutkan Panjang Komentar
 func urutkanPanjangKomentar(){
@@ -396,7 +392,6 @@ func urutkanPanjangKomentar(){
 	tampilkanSemuaKomentar()
 }
 
-
 // Subprogram: Mengurutkan Sentimen Komentar
 func urutkanSentimenKomentar(){
 	var mode string
@@ -417,7 +412,7 @@ func urutkanSentimenKomentar(){
 	tampilkanSemuaKomentar()
 }
 
-//gatau pake ini engga
+// Subprogram: Prioritas Sentimen
 func prioritasSentimen(s sentiment) int {
 	switch s {
 	case sentiment(sentimenPositif):
@@ -430,7 +425,6 @@ func prioritasSentimen(s sentiment) int {
 		return 4
 	}
 }
-
 
 // Subprogram: Statistik Komentar
 func statistikSentimen(){
@@ -448,11 +442,10 @@ func statistikSentimen(){
 	}
 
 	fmt.Println("Statistik Sentimen Komentar:")
-	fmt.Printf("Positif:", positif)
-	fmt.Printf("Netral :", netral)
-	fmt.Printf("Negatif:", negatif)
+	fmt.Printf("Positif: %d\n", positif)
+	fmt.Printf("Netral : %d\n", netral)
+	fmt.Printf("Negatif: %d\n", negatif)
 }
-
 
 func main() {
 	header()
