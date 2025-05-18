@@ -30,9 +30,8 @@ var jumlahKomentar int = 0
 
 
 // Kata kunci analisis sentimen
-var kataPositif = [3]string{"bagus", "baik", "cantik"}
-var kataNegatif = [3]string{"buruk", "jahat", "jelek"}
-
+var kataPositif = [13]string{"bagus", "baik", "cantik", "ganteng", "keren", "mantap", "hebat", "memuaskan", "indah", "menarik", "puas", "senang", "suka"}
+var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak suka", "mengecewakan", "lebay", "aneh", "tidak suka", "marah", "sedih", "rusak"}
 
 // Initial State: listKomentar belum ada, jumlahKomentar = 0 
 // Final state: komentarList telah berisi komentar-komentar yang sudah dianalisis, diedit, dihapus, dicari, atau diurutkan sesuai interaksi pengguna.
