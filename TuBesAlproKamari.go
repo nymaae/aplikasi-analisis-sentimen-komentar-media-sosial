@@ -447,9 +447,26 @@ func statistikSentimen(){
 	fmt.Printf("Negatif: %d\n", negatif)
 }
 
+func inisialisasiDataDummy(listKomentar *komentar, n *int) {
+	listKomentar[0].teks, listKomentar[0].sentimen = "Desain tasnya bagus dan sangat menarik.", "positif"
+        listKomentar[1].teks, listKomentar[1].sentimen = "Pelayanan customer service-nya sangat mengecewakan.", "negatif"
+        listKomentar[2].teks, listKomentar[2].sentimen = "Saya puas banget belanja di sini, barangnya bagus dan designnya gemes!", "positif"
+        listKomentar[3].teks, listKomentar[3].sentimen = "Sayangnya kualitas produk ini cukup buruk untuk harga segitu.", "negatif"
+        listKomentar[4].teks, listKomentar[4].sentimen = "Tampilan websitenya indah dan navigasinya mudah digunakan.", "positif"
+        listKomentar[5].teks, listKomentar[5].sentimen = "Makanan di resto itu tidak sesuai dengan tampilan di buku menunya.", "negatif"
+        listKomentar[6].teks, listKomentar[6].sentimen = "Tempat ini sangat indah dan family friendly.", "positif"
+        listKomentar[7].teks, listKomentar[7].sentimen = "Respon admin lebay dan tidak profesional saat ditanya.", "negatif"
+        listKomentar[8].teks, listKomentar[8].sentimen = "Pengalaman pertama yang sangat menyenangkan, suka banget!", "positif"
+        listKomentar[9].teks, listKomentar[9].sentimen = "Barang yang datang rusak dan tidak sesuai dengan pesanan saya.", "negatif"
+
+	*n = 10
+}
+
+
 func main() {
 	header()
 	var username, password string
 	login(&username, &password)
 	menu()
+	inisialisasiDataDummy(&listKomentar, &jumlahKomentar)
 }
