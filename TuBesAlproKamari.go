@@ -462,7 +462,6 @@ func inisialisasiDataDummy(listKomentar *komentar, n *int) {
 	*n = 10
 }
 
-
 func main() {
 	header()
 	var username, password string
