@@ -447,7 +447,7 @@ func statistikSentimen(){
 	fmt.Printf("Negatif: %d\n", negatif)
 }
 
-func inisialisasiDataDummy(listKomentar *komentar, n *int) {
+func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
 	listKomentar[0].teks, listKomentar[0].sentimen = "Desain tasnya bagus dan sangat menarik.", "positif"
         listKomentar[1].teks, listKomentar[1].sentimen = "Pelayanan customer service-nya sangat mengecewakan.", "negatif"
         listKomentar[2].teks, listKomentar[2].sentimen = "Saya puas banget belanja di sini, barangnya bagus dan designnya gemes!", "positif"
@@ -466,6 +466,6 @@ func main() {
 	header()
 	var username, password string
 	login(&username, &password)
-	menu()
 	inisialisasiDataDummy(&listKomentar, &jumlahKomentar)
+	menu()
 }
