@@ -22,20 +22,22 @@ type komentar struct {
 	sentimen  sentiment
 }
 
+// Tipe bentukan Sentiment
 type sentiment string
 
 // Array statis utama
 var listKomentar [NMAX]komentar
 var jumlahKomentar int = 0
 
-
 // Kata kunci analisis sentimen
+var positif, netral, negatif int 
 var kataPositif = [13]string{"bagus", "baik", "cantik", "ganteng", "keren", "mantap", "hebat", "memuaskan", "indah", "menarik", "puas", "senang", "suka"}
 var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak suka", "mengecewakan", "lebay", "aneh", "tidak suka", "marah", "sedih", "rusak"}
 
 // Initial State: listKomentar belum ada, jumlahKomentar = 0 
 // Final state: komentarList telah berisi komentar-komentar yang sudah dianalisis, diedit, dihapus, dicari, atau diurutkan sesuai interaksi pengguna.
 
+// Subprogram : Analisis Sentimen
 func analisisSentimen(teks string) sentiment {
 	var i int
 	for i = 0; i < len(kataPositif); i++ {
@@ -51,6 +53,7 @@ func analisisSentimen(teks string) sentiment {
 	return sentiment(sentimenNetral)
 }
 
+// Subprogram : Bersih Layar
 func bersihLayar() {
 	cmd := exec.Command("cmd", "/c", "cls")
 	cmd.Stdout = os.Stdout
@@ -159,7 +162,7 @@ func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 }
 
 // Subprogram: Menu untuk Menampilkan Semua Komentar
-func TampilkanSemuaKomentar() {
+func tampilkanSemuaKomentar() {
 	var pilih int
     fmt.Println("-----------------------------------------------")
     fmt.Println("      MENU PILIHAN MENAMPILKAN SEMUA KOMENTAR  ")
@@ -440,7 +443,6 @@ func statistikSentimen(){
 			negatif++
 		}
 	}
-
 	fmt.Println("Statistik Sentimen Komentar:")
 	fmt.Printf("Positif: %d\n", positif)
 	fmt.Printf("Netral : %d\n", netral)
@@ -458,8 +460,10 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
         listKomentar[7].teks, listKomentar[7].sentimen = "Respon admin lebay dan tidak profesional saat ditanya.", "negatif"
         listKomentar[8].teks, listKomentar[8].sentimen = "Pengalaman pertama yang sangat menyenangkan, suka banget!", "positif"
         listKomentar[9].teks, listKomentar[9].sentimen = "Barang yang datang rusak dan tidak sesuai dengan pesanan saya.", "negatif"
+	listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
+	listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
 
-	*n = 10
+	*n = 12
 }
 
 func main() {
