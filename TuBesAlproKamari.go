@@ -465,8 +465,8 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
         listKomentar[7].teks, listKomentar[7].sentimen = "Respon admin lebay dan tidak profesional saat ditanya.", "negatif"
         listKomentar[8].teks, listKomentar[8].sentimen = "Pengalaman pertama yang sangat menyenangkan, suka banget!", "positif"
         listKomentar[9].teks, listKomentar[9].sentimen = "Barang yang datang rusak dan tidak sesuai dengan pesanan saya.", "negatif"
-	    listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
-	    listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
+	listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
+	listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
 
 	*n = 12
 	positif = 5
