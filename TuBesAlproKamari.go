@@ -68,7 +68,7 @@ func header() {
 	fmt.Println("==============================================================================")
 }
 
-func login(P, S *string) {
+func login(S, P *string) {
     fmt.Println("LOGIN")
 	
 	for {
@@ -102,6 +102,7 @@ func menu() {
 	        fmt.Println("8. Statistik Sentimen")
 	        fmt.Println("9. Exit")
 	        fmt.Println("------------------------------")
+
 	        fmt.Print("Tentukan Pilihan Anda (1-9): ")
 			fmt.Scan(&pilih)
 		    switch pilih {
@@ -148,7 +149,7 @@ func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 		fmt.Println("---------------------------------------")
 
 		fmt.Print("Masukkan komentar: ")
-		fmt.Scan(&teks) 
+		fmt.Scan(&teks)
 		list[*jumlah].teks = teks
 		list[*jumlah].sentimen = analisisSentimen(teks)
 		*jumlah++
@@ -162,7 +163,7 @@ func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 }
 
 // Subprogram: Menu untuk Menampilkan Semua Komentar
-func tampilkanSemuaKomentar() {
+func menutampilkanSemuaKomentar() {
 	var pilih int
     fmt.Println("-----------------------------------------------")
     fmt.Println("      MENU PILIHAN MENAMPILKAN SEMUA KOMENTAR  ")
@@ -182,7 +183,7 @@ func tampilkanSemuaKomentar() {
 	case 2:
 		bersihLayar()
 		sortKomentarDesc()
-		TampilkanSemuaKomentar()
+		tampilkanSemuaKomentar()
 	case 3:
 		for pilih != 3 {
 				fmt.Println("Pilihan tidak valid.")
@@ -248,7 +249,9 @@ func editKomentar(){
 	var found bool //penanda komentar lama ditemukan 
 	
 	fmt.Print("Masukkan komentar yang ingin diubah: ")
-	fmt.Scan(&lama)
+	fmt.Scanf("%[^\n]", &lama)
+	fmt.Scanln()              
+
 	found = false
 	i = 0
 	
@@ -256,7 +259,9 @@ func editKomentar(){
 	//selama komentar lamanya belum ketemu dan i nya kurang dari jumlah komentar    
 			if listKomentar[i].teks == lama {
 			fmt.Print("Masukkan komentar baru: ")
-			fmt.Scan(&baru)
+			fmt.Scanf("%[^\n]", &baru)
+			fmt.Scanln()
+			
 			listKomentar[i].teks = baru
 			listKomentar[i].sentimen = analisisSentimen(baru)
 			fmt.Println("Komentar berhasil diubah.")
@@ -450,7 +455,7 @@ func statistikSentimen(){
 }
 
 func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
-	listKomentar[0].teks, listKomentar[0].sentimen = "Desain tasnya bagus dan sangat menarik.", "positif"
+	    listKomentar[0].teks, listKomentar[0].sentimen = "Desain tasnya bagus dan sangat menarik.", "positif"
         listKomentar[1].teks, listKomentar[1].sentimen = "Pelayanan customer service-nya sangat mengecewakan.", "negatif"
         listKomentar[2].teks, listKomentar[2].sentimen = "Saya puas banget belanja di sini, barangnya bagus dan designnya gemes!", "positif"
         listKomentar[3].teks, listKomentar[3].sentimen = "Sayangnya kualitas produk ini cukup buruk untuk harga segitu.", "negatif"
@@ -460,10 +465,13 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
         listKomentar[7].teks, listKomentar[7].sentimen = "Respon admin lebay dan tidak profesional saat ditanya.", "negatif"
         listKomentar[8].teks, listKomentar[8].sentimen = "Pengalaman pertama yang sangat menyenangkan, suka banget!", "positif"
         listKomentar[9].teks, listKomentar[9].sentimen = "Barang yang datang rusak dan tidak sesuai dengan pesanan saya.", "negatif"
-	listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
-	listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
+	    listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
+	    listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
 
 	*n = 12
+	positif = 5
+    negatif = 5
+    netral = 2
 }
 
 func main() {
