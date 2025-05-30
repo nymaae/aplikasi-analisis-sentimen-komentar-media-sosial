@@ -7,6 +7,7 @@ import (
 	"strings"
 )
 
+//// Maksimum jumlah komentar yang dapat disimpan
 const NMAX int = 1000
 
 // Tipe Sentimen
@@ -16,16 +17,16 @@ const (
 	sentimenNegatif = "Negatif"
 )
 
-// Tipe bentukan Komentar
+// Tipe bentukan Komentar untuk menyimpan komentar dan hasil sentimennya
 type komentar struct {
 	teks      string
 	sentimen  sentiment
 }
 
-// Tipe bentukan Sentiment
+// Alias Tipe bentukan Sentiment 
 type sentiment string
 
-// Array statis utama
+// Array statis utama untuk menyimpan semua komentar 
 var listKomentar [NMAX]komentar
 var jumlahKomentar int = 0
 
@@ -34,10 +35,12 @@ var positif, netral, negatif int
 var kataPositif = [13]string{"bagus", "baik", "cantik", "ganteng", "keren", "mantap", "hebat", "memuaskan", "indah", "menarik", "puas", "senang", "suka"}
 var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak suka", "mengecewakan", "lebay", "aneh", "tidak suka", "marah", "sedih", "rusak"}
 
-// Initial State: listKomentar belum ada, jumlahKomentar = 0 
-// Final state: komentarList telah berisi komentar-komentar yang sudah dianalisis, diedit, dihapus, dicari, atau diurutkan sesuai interaksi pengguna.
 
-// Subprogram : Analisis Sentimen
+// Subprogram: Analisis Sentimen
+/*
+	I.S. Belum ada sentimen yang ditentukan untuk sebuah komentar
+	F.S. Sentimen dari komentar dikembalikan dalam bentuk kategori: positif, negatif, atau netral
+*/
 func analisisSentimen(teks string) sentiment {
 	var i int
 	for i = 0; i < len(kataPositif); i++ {
@@ -53,13 +56,24 @@ func analisisSentimen(teks string) sentiment {
 	return sentiment(sentimenNetral)
 }
 
-// Subprogram : Bersih Layar
+
+// Subprogram: Bersih Layar
+/*
+	I.S. Terminal dalam keadaan sebelumnya (berisi tampilan/output dari proses sebelumnya)
+	F.S. Layar terminal dibersihkan dan siap untuk menampilkan tampilan baru
+*/
 func bersihLayar() {
 	cmd := exec.Command("cmd", "/c", "cls")
 	cmd.Stdout = os.Stdout
 	cmd.Run()
 }
 
+
+// Subprogram: Header
+/*
+	I.S. Belum ada tampilan header pada terminal
+	F.S. Tampilan header program Sentilytics muncul di terminal
+*/
 func header() {
 	fmt.Println("==============================================================================")
 	fmt.Println("                        SELAMAT DATANG DI SENTILYTICS                         ")
@@ -68,6 +82,12 @@ func header() {
 	fmt.Println("==============================================================================")
 }
 
+
+// Subprogram   : Login Pengguna
+/*
+	Initial State: Variabel pointer S dan P belum berisi username dan password pengguna.
+	Final State  : Variabel S dan P telah berisi nilai "kamari", dan proses login berhasil dilakukan.
+*/
 func login(S, P *string) {
     fmt.Println("LOGIN")
 	
@@ -85,7 +105,13 @@ func login(S, P *string) {
 	fmt.Println("Login berhasil!")
 }
 
-// Menu Utama
+
+
+// Subprogram    : Menampilkan Menu Utama
+/*
+	Initial State : Program belum menunjukkan menu pilihan ke pengguna.
+	Final State   : Menu ditampilkan dan aksi diambil sesuai pilihan pengguna hingga pengguna memilih keluar (exit).
+*/
 func menu() {
 	var pilih int
 	for pilih != 9 {
@@ -138,7 +164,12 @@ func menu() {
     }
 }
 
-// Subprogram: Menambahkan Komentar
+
+// Subprogram : Menambahkan Komentar
+/*
+	Initial State : listKomentar mungkin kosong atau berisi komentar lama, jumlahKomentar berisi nilai saat ini.
+	Final State   : Sebuah komentar baru ditambahkan ke listKomentar, jumlahKomentar bertambah 1 untuk setiap komentar yang berhasil ditambahkan.
+*/
 func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 	var teks string
 	var pilih int 
@@ -162,7 +193,12 @@ func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 		menu()
 }
 
+
 // Subprogram: Menu untuk Menampilkan Semua Komentar
+/*
+	Initial State: Belum ada tampilan komentar yang diurutkan, variabel 'pilih' belum diisi oleh pengguna.
+	Final State  : Komentar telah ditampilkan sesuai urutan (ascending/descending) atau pengguna kembali ke menu utama.
+*/
 func menutampilkanSemuaKomentar() {
 	var pilih int
     fmt.Println("-----------------------------------------------")
@@ -201,8 +237,14 @@ func menutampilkanSemuaKomentar() {
 	menu()
 }
 
+
+
+// Subprogram: Mengurutkan komentar berdasarkan panjang teks secara ascending
+/*
+	Initial State: listKomentar belum terurut berdasarkan panjang teks.
+	Final State  : listKomentar terurut naik berdasarkan panjang teks komentar.
+*/
 func sortKomentarAsc() { 
-//Mengurutkan teks yang diinput dari yang paling sedikit
 		var i, minIdx, j int 
 		for i = 0; i < jumlahKomentar-1; i++ {
 		minIdx = i
@@ -215,8 +257,13 @@ func sortKomentarAsc() {
 	}
 }
 
+
+// Subprogram: Mengurutkan komentar berdasarkan panjang teks secara descending
+/*
+	Initial State: listKomentar belum terurut berdasarkan panjang teks.
+	Final State  : listKomentar terurut turun berdasarkan panjang teks komentar.
+*/
 func sortKomentarDesc() {
-//Mengurutkan teks yang diinput dari yang paling banyak
 	var i, maxIdx, j int 
 	for i = 0; i < jumlahKomentar-1; i++ {
 		maxIdx = i
@@ -229,7 +276,12 @@ func sortKomentarDesc() {
 	}
 }
 
+
 // Subprogram: Menampilkan Semua Komentar
+/*
+	Initial State: Komentar telah dianalisis dan disimpan dalam listKomentar, jumlahKomentar ≥ 0.
+	Final State  : Komentar ditampilkan satu per satu ke layar jika ada, atau muncul pesan jika tidak ada komentar.
+*/
 func tampilkanSemuaKomentar(){
 	var i int 
 	fmt.Println("Tampilkan Semua Komentar: ")
@@ -242,7 +294,12 @@ func tampilkanSemuaKomentar(){
 	}
 }
 
+
 // Subprogram: Mengedit Komentar
+/*
+	Initial State : Komentar lama masih tersimpan di listKomentar
+	Final State   : Komentar lama digantikan oleh komentar baru, dengan sentimen yang diperbarui
+*/
 func editKomentar(){
 	var i int 
 	var lama, baru string //komentar lama dan baru  
@@ -272,7 +329,13 @@ func editKomentar(){
 	}
 }
 
+
+
 // Subprogram: Menghapus Komentar
+/*
+	Initial State : listKomentar berisi komentar, pengguna belum memilih komentar yang ingin dihapus
+	Final State   : Jika ditemukan, komentar dihapus dari listKomentar dan jumlahKomentar berkurang 1
+*/
 func hapusKomentar(){
 	var i, j int //i, j buat looping
 	var teks string //cari komentar yang mau dihapus
@@ -299,6 +362,11 @@ func hapusKomentar(){
 }
 
 // Subprogram: Mencari Komentar
+/*
+	Initial State : listKomentar terisi komentar, pengguna belum melakukan pencarian
+	Final State   : Jika ditemukan, komentar akan dicetak dengan sentimennya
+*/
+
 func cariKomentar(){
 	var keyword string
 	var metode int
@@ -323,7 +391,12 @@ func cariKomentar(){
 	}
 }
 
+
 // Subprogram: Pencarian Komentar dengan Sequential Search
+/*
+	Initial State : keyword merupakan kata kunci pencarian, listKomentar berisi komentar-komentar hasil input atau analisis, jumlahKomentar ≥ 0.
+	Final State   : Jika ditemukan, ditampilkan komentar yang mengandung keyword (tidak case sensitive); jika tidak ditemukan, tampilkan pesan bahwa komentar tidak ditemukan.
+*/
 func sequentialSearch(keyword string) {
 	var ditemukan bool = false
 	var i int
@@ -338,7 +411,13 @@ func sequentialSearch(keyword string) {
 	}
 }
 
+
+
 // Subprogram: Pencarian Komentar dengan Binary Search
+/*
+	Initial State : keyword merupakan kata kunci pencarian, listKomentar sudah terurut secara alfabet berdasarkan teks komentar, jumlahKomentar ≥ 0.
+	Final State   : Jika ditemukan, ditampilkan komentar yang mengandung keyword (tidak case sensitive); jika tidak ditemukan, tampilkan pesan bahwa komentar tidak ditemukan.
+*/
 func binarySearch(keyword string) {
 	var low, high, mid int
 	sortKomentarAlphabet()
@@ -364,6 +443,13 @@ func binarySearch(keyword string) {
 	}
 }
 
+
+
+// Subprogram: Mengurutkan Komentar secara Alfabet
+/*
+	Initial State : listKomentar belum terurut berdasarkan urutan alfabet teks komentar, jumlahKomentar ≥ 0.
+	Final State   : listKomentar terurut secara naik (ascending) berdasarkan urutan alfabet teks komentar.
+*/
 func sortKomentarAlphabet() {
 	var i, j int
 	for i = 0; i < jumlahKomentar-1; i++ {
@@ -375,7 +461,15 @@ func sortKomentarAlphabet() {
 	}
 }
 
+
+
 // Subprogram: Mengurutkan Panjang Komentar
+/*
+	Initial State : listKomentar berisi komentar-komentar dengan panjang teks yang belum terurut, 
+				   pengguna belum memilih mode pengurutan (ascending/descending).
+	Final State   : listKomentar terurut berdasarkan panjang teks komentar sesuai mode yang dipilih 
+				   ("asc" untuk ascending, "desc" untuk descending), dan semua komentar ditampilkan.
+*/
 func urutkanPanjangKomentar(){
 	var mode string 
 	fmt.Print("Urutkan berdasarkan panjang komentar (asc/desc): ")
@@ -395,7 +489,14 @@ func urutkanPanjangKomentar(){
 	tampilkanSemuaKomentar()
 }
 
+
 // Subprogram: Mengurutkan Sentimen Komentar
+/*
+	Initial State : listKomentar berisi komentar-komentar dengan sentimen yang belum terurut,
+	                pengguna belum memilih mode pengurutan ("asc" untuk ascending atau "desc" untuk descending).
+	Final State   : listKomentar telah terurut berdasarkan sentimen komentar sesuai mode yang dipilih,
+	                dan semua komentar berhasil ditampilkan.
+*/
 func urutkanSentimenKomentar(){
 	var mode string
 	var i, j int
@@ -415,7 +516,13 @@ func urutkanSentimenKomentar(){
 	tampilkanSemuaKomentar()
 }
 
+
 // Subprogram: Prioritas Sentimen
+/*
+	Initial State : Variabel 's' berisi nilai sentimen yang belum diurutkan berdasarkan prioritas.
+	Final State   : Fungsi mengembalikan nilai integer yang merepresentasikan prioritas sentimen:
+	               1 untuk sentimen positif, 2 untuk netral, 3 untuk negatif, dan 4 untuk lainnya.
+*/
 func prioritasSentimen(s sentiment) int {
 	switch s {
 	case sentiment(sentimenPositif):
@@ -429,7 +536,14 @@ func prioritasSentimen(s sentiment) int {
 	}
 }
 
+
 // Subprogram: Statistik Komentar
+/*
+	Initial State : listKomentar berisi kumpulan komentar dengan sentimen yang sudah dianalisis, 
+					jumlahKomentar ≥ 0, variabel penghitung statistik belum diinisialisasi.
+	Final State   : Statistik jumlah komentar dengan sentimen positif, netral, dan negatif
+					ditampilkan ke layar terminal.
+*/
 func statistikSentimen(){
 	var i int 
 	var positif, netral, negatif int
@@ -447,8 +561,16 @@ func statistikSentimen(){
 	fmt.Printf("Positif: %d\n", positif)
 	fmt.Printf("Netral : %d\n", netral)
 	fmt.Printf("Negatif: %d\n", negatif)
-}
+}	
 
+
+
+// Subprogram: inisialisasiDataDummy
+/*
+	Initial State : listKomentar dan variabel n belum berisi data komentar apapun.
+	Final State   : listKomentar terisi dengan 12 komentar dummy beserta sentimennya, 
+					variabel n berisi nilai 12, dan variabel statistik positif, negatif, netral diupdate.
+*/
 func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
 	    listKomentar[0].teks, listKomentar[0].sentimen = "Desain tasnya bagus dan sangat menarik.", "positif"
         listKomentar[1].teks, listKomentar[1].sentimen = "Pelayanan customer service-nya sangat mengecewakan.", "negatif"
@@ -469,6 +591,11 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
     netral = 2
 }
 
+
+/*
+	I.S. Program belum menerima input menu dari pengguna.
+	F.S. Menu dipilih dan prosedur yang sesuai dijalankan berdasarkan input pengguna.
+	*/
 func main() {
 	header()
 	var username, password string
