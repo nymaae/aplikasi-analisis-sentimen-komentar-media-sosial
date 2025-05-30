@@ -152,7 +152,7 @@ func tambahKomentar(list *[NMAX]komentar, jumlah *int) {
 		fmt.Scan(&teks)
 		list[*jumlah].teks = teks
 		list[*jumlah].sentimen = analisisSentimen(teks)
-		*jumlah++
+		*jumlah = *jumlah + 1
 
 		fmt.Println("Komentar berhasil ditambahkan.")
 		fmt.Println("<<1. Tambah komentar lagi>>", "\t", "<<0. Kembali ke Menu>>")
@@ -249,9 +249,7 @@ func editKomentar(){
 	var found bool //penanda komentar lama ditemukan 
 	
 	fmt.Print("Masukkan komentar yang ingin diubah: ")
-	fmt.Scanf("%[^\n]", &lama)
-	fmt.Scanln()              
-
+	fmt.Scan(&lama)  
 	found = false
 	i = 0
 	
@@ -259,9 +257,7 @@ func editKomentar(){
 	//selama komentar lamanya belum ketemu dan i nya kurang dari jumlah komentar    
 			if listKomentar[i].teks == lama {
 			fmt.Print("Masukkan komentar baru: ")
-			fmt.Scanf("%[^\n]", &baru)
-			fmt.Scanln()
-			
+			fmt.Scan(&baru)
 			listKomentar[i].teks = baru
 			listKomentar[i].sentimen = analisisSentimen(baru)
 			fmt.Println("Komentar berhasil diubah.")
@@ -271,7 +267,6 @@ func editKomentar(){
 		}
 		
 	}
-	
 	if !found {
 		fmt.Println("Komentar tidak ditemukan.")
 	}
