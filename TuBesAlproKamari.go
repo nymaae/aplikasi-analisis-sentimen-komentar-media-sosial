@@ -7,14 +7,14 @@ import (
 	"strings"
 )
 
-//// Maksimum jumlah komentar yang dapat disimpan
+// Maksimum jumlah komentar yang dapat disimpan
 const NMAX int = 1000
 
 // Tipe Sentimen
 const (
-	sentimenPositif = "Positif"
-	sentimenNetral  = "Netral"
-	sentimenNegatif = "Negatif"
+	sentimenPositif = "positif"
+	sentimenNetral  = "netral"
+	sentimenNegatif = "negatif"
 )
 
 // Tipe bentukan Komentar untuk menyimpan komentar dan hasil sentimennya
@@ -38,8 +38,10 @@ var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak
 
 // Subprogram: Analisis Sentimen
 /*
-	I.S. : Belum ada sentimen yang ditentukan untuk sebuah komentar
-	F.S. : Sentimen dari komentar dikembalikan dalam bentuk kategori: positif, negatif, atau netral
+	I.S. : Belum ada sentimen yang ditentukan untuk sebuah
+	       komentar
+	F.S. : Sentimen dari komentar dikembalikan dalam bentuk
+	       kategori: positif, negatif, atau netral
 */
 func analisisSentimen(teks string) sentiment {
 	var i int
@@ -59,8 +61,10 @@ func analisisSentimen(teks string) sentiment {
 
 // Subprogram: Bersih Layar
 /*
-	I.S. : Terminal dalam keadaan sebelumnya (berisi tampilan/output dari proses sebelumnya)
-	F.S. : Layar terminal dibersihkan dan siap untuk menampilkan tampilan baru
+	I.S. : Terminal dalam keadaan sebelumnya (berisi tampilan
+	       /output dari proses sebelumnya)
+	F.S. : Layar terminal dibersihkan dan siap untuk 
+	       menampilkan tampilan baru
 */
 func bersihLayar() {
 	cmd := exec.Command("cmd", "/c", "cls")
@@ -85,8 +89,10 @@ func header() {
 
 // Subprogram   : Login Pengguna
 /*
-	I.S. : Variabel pointer S dan P belum berisi username dan password pengguna.
-	F.S. : Variabel S dan P telah berisi nilai "kamari", dan proses login berhasil dilakukan.
+	I.S. : Variabel pointer S dan P belum berisi username dan 
+	       password pengguna.
+	F.S. : Variabel S dan P telah berisi nilai "kamari", dan 
+	       proses login berhasil dilakukan.
 */
 func login(S, P *string) {
     fmt.Println("LOGIN")
@@ -110,7 +116,8 @@ func login(S, P *string) {
 // Subprogram    : Menampilkan Menu Utama
 /*
 	I.S. : Program belum menunjukkan menu pilihan ke pengguna.
-	F.S. : Menu ditampilkan dan aksi diambil sesuai pilihan pengguna hingga pengguna memilih keluar (exit).
+	F.S. : Menu ditampilkan dan aksi diambil sesuai pilihan 
+	       pengguna hingga pengguna memilih keluar (exit).
 */
 func menu() {
 	var pilih int
@@ -582,8 +589,8 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
         listKomentar[7].teks, listKomentar[7].sentimen = "Respon admin lebay dan tidak profesional saat ditanya.", "negatif"
         listKomentar[8].teks, listKomentar[8].sentimen = "Pengalaman pertama yang sangat menyenangkan, suka banget!", "positif"
         listKomentar[9].teks, listKomentar[9].sentimen = "Barang yang datang rusak dan tidak sesuai dengan pesanan saya.", "negatif"
-	listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
-	listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
+	    listKomentar[10].teks, listKomentar[10].sentimen = "Produk diterima dengan baik, namun belum sempat digunakan.", "netral"
+	    listKomentar[11].teks, listKomentar[11].sentimen = "Saya baru saja menerima paket ini tadi pagi.", "netral"
 
 	*n = 12
 	positif = 5
@@ -594,7 +601,7 @@ func inisialisasiDataDummy(listKomentar *[NMAX]komentar, n *int) {
 
 /*
 	I.S. : Program belum menerima input menu dari pengguna.
-	F.S. : Menu dipilih dan prosedur yang sesuai dijalankan berdasarkan input pengguna.
+	F.S. : Menu dipilih dan prosedur yang sesuai dijalankan berdasarkan input pengguna.
 */
 func main() {
 	header()
