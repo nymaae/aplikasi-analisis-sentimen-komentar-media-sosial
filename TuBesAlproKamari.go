@@ -33,7 +33,7 @@ var jumlahKomentar int = 0
 // Kata kunci analisis sentimen
 var positif, netral, negatif int 
 var kataPositif = [13]string{"bagus", "baik", "cantik", "ganteng", "keren", "mantap", "hebat", "memuaskan", "indah", "menarik", "puas", "senang", "suka"}
-var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak suka", "mengecewakan", "lebay", "aneh", "tidak suka", "marah", "sedih", "rusak"}
+var kataNegatif = [13]string{"buruk", "jahat", "jelek", "benci", "gagal", "tidak suka", "mengecewakan", "lebay", "aneh", "tidak senang", "marah", "sedih", "rusak"}
 
 
 // Subprogram: Analisis Sentimen
